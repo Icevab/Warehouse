@@ -1,0 +1,17 @@
+Warehouse, Josh Smith, Cmyui Avenue
+
+Money made: 54.23
+Change in money made: -3.48
+
+Money spent: 102.3
+Change in money spent: 3
+
+Cash: 5
+Change in cash: 542.2
+
+
+# THIS IS NOT WHAT IT NEEDS TO BE !!!!!!!!!!!!!!!!!
+Items: 2 
+
+Taxes paid: 54.34
+Change in taxes paid: 4968.34

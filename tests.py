@@ -35,7 +35,7 @@ provider.add_carrier(carrier6)
 # print(len(warehouse.items))
 
 # print(calculate_percent_off(i3, 67))
-print(calculate_price(i3, 67))
+print(callable(calculate_price))
 
 # items = {
 #     "fruit": {

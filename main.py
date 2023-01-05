@@ -5,6 +5,9 @@ console = Console()
 
 import time
 
+# TODO: Transform it into a game (?)
+# TODO: Make it a CLI
+
 class Warehouse:
     def __init__(self, name: str, location: str, items, cash: float):
         self.name = name
@@ -216,3 +219,6 @@ def calculate_percent_off(item: Item, amount):
 def calculate_price(item: Item, amount):
     console.print(f"{(amount * item.price) - (amount * (item.price - calculate_percent_off(item, amount)))} saved" , style="bold red")
     return amount * (item.price - calculate_percent_off(item, amount))
+
+def hello():
+    return "hello"
