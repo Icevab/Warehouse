@@ -1,27 +1,15 @@
 import main
+import tests
+import inspect
+from rich.console import Console
 
-
-# commands = func that:
-# is a function (callable), but we only want items that don't start with "__"
-# and not func.startswith("__") does exactly that
-# but callable will also be True when we pass a class,
-# all of the classes' names start with a capital letter
-# so to prevent adding classes I check if the first letter isn't capital with
-# and not func[0].capitalize() == func[0]
-# so that if the first letter of func's name is the same as if it was capital
-# then it's a class and we don't need it in commands
-func_names = [func for func in dir(main) if callable(getattr(main, func)) and not func.startswith("__") and not func[0].capitalize() == func[0]]      
-# print(func_names)
+console = Console()
 
 def s():
     print("s")
 
-commands = {"s": s}
+all_functions = dict(inspect.getmembers(main, inspect.isfunction))
 
-# for func in func_names:
-#     commands[func] = func
-
-print(commands)
 
 def sum(x, y):
     return x + y
@@ -29,12 +17,52 @@ def sum(x, y):
 def select_function():
     pass
 
-def app():
-    while True:
-        x = int(input())
-        y = int(input())
-        print("\n")
-        print(sum(x, y))
+def print_all_properties(object):
+    l = []
+    
+    match object.lower():
+        case "warehouse":
+            l = tests.all_warehouses
+        case "provider":
+            l = tests.all_providers
+        case "carrier":
+            l = tests.all_carriers
+        case "item":
+            l = tests.all_items
+            
+            
+    
+    for property in l:
+        for item in property.__dir__():
+            # we want to make sure that the item (object property)
+            # doesn't start with "__" and also it does not have
+            # attribute "__self__", which is an attribute bound methods have
+            if not item.startswith("__") and not hasattr(property.__getattribute__(item), "__self__"):
+                # print(type(item))
+                # print(hasattr(warehouse.__getattribute__(item), "__self__"))
+                console.print(f"{item} -- {(property.__getattribute__(item))}", style="purple")
+                
         print("\n")
         
-# app()
+    print("\n")         
+
+def app():
+    i = 0
+    while i < 1:
+        # command = input()
+        console.print("Hello, and welcome to the Warehouse,", style="bold red")
+        console.print("Available warehouses: ", style="bold red")
+        print_all_properties("warehouse")
+        console.print("Available providers: ", style="bold green")
+        print_all_properties("provider")
+        console.print("Available carriers: ", style="bold yellow")
+        print_all_properties("carrier")
+        console.print("Available items: ", style="bold green")
+        print_all_properties("item")
+        
+        
+        i += 1
+        
+        print("\n")
+        
+app()

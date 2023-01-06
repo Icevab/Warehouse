@@ -5,7 +5,6 @@ console = Console()
 
 import time
 
-# TODO: Transform it into a game (?)
 # TODO: Make it a CLI
 
 class Warehouse:
@@ -103,6 +102,9 @@ class Provider:
         self.carriers.append(c)
         c.set_occupation(self)
         
+    def __repr__(self):
+        return self.name
+    
 
 
 class Carrier:
@@ -118,6 +120,9 @@ class Carrier:
 
     def __repr__(self):
         return self.name
+
+    def __str__(self):
+        return self.name
     
 class Item:
     # nodes - ["smth", "food", "fruit"]
@@ -128,6 +133,9 @@ class Item:
         self.price = price
 
     def __repr__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
 def build_nodes_of_item(item: Item):
@@ -222,3 +230,21 @@ def calculate_price(item: Item, amount):
 
 def hello():
     return "hello"
+
+def make_abbreviation(s: str) -> str:
+    underscores = []
+    new_string = s[0]
+    
+    for i in range(0, len(s)):
+        if s[i] == "_":
+            underscores.append(i)
+    
+    # number of letter in an abbreviation is
+    # the amount of underscores + 1,
+    # but the first letter is the first element of the string
+    # that we pass, so this loop adds the rest
+    for i in range(0, len(underscores)):
+        new_string += s[underscores[i] + 1]
+            
+    
+    return new_string

@@ -1,7 +1,23 @@
-class Report:
-    def __init__(self, report):
-        self.report = report
+from main import make_abbreviation
 
+class Report:
+    def __init__(self, company, report_txt, data):
+        self.company = company
+        self.report_txt = report_txt
+        self.data = take_data_from_txt(report_txt)
+        
+        
+        
+def commands_of_data(data):
+    """Creates a dictionary of commands where keys are abbreviations
+    and values are the commands"""
+    
+    commands = {}
+    
+    for item in data:
+        commands[make_abbreviation(item)] = item
+       
+    return commands
 
 def append_item(d, st_with, txt):
     """Appends item to a given dictionary -- d,
@@ -26,6 +42,11 @@ def append_item(d, st_with, txt):
     d[item] = float(txt[len(st_with) + 2:])
 
 def take_data_from_txt(txt):
+    """Takes all the info from a .txt,
+    for example: if there's a line "Money made: ",
+    than it will take it, make it "money_made",
+    and it will assign the assign a value to it according to the .txt"""
+    
     data = {}
     
     with open(txt, "r") as file:
@@ -35,23 +56,7 @@ def take_data_from_txt(txt):
                 # print(line.strip()[:line.strip().index(":")])
                 # line.strip()[:line.strip().index(":")] -- takes every element before colon (:)
                 # in line.strip()
-                append_item(data, line.strip()[:line.strip().index(":")], line)
-                    
-            # if line.startswith("Money made: "):
-            #     append_item(data, "Money made: ", line.strip())
-            # if line.startswith("Change in money made: "):
-            #     append_item(data, "Change in money made: ", line.strip())
-            # if line.startswith("Money spent: "):
-            #     append_item(data, "Money spent: ", line.strip())
-            # if line.startswith("Change in money spent: "):
-            #     append_item(data, "Change in money spent: ", line.strip())
-            # if line.startswith("Cash: "):
-            #     append_item(data, "Cash: ", line.strip())
-            # if line.startswith("Change in cash: "):
-            #     append_item(data, "Change in cash: ", line.strip())
-            
+                append_item(data, line.strip()[:line.strip().index(":")], line)       
                 
     return data
-
-print(take_data_from_txt("report_example.txt"))
                 
